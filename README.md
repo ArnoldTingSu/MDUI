@@ -193,7 +193,7 @@ Distributed under the MIT License. See `LICENSE.md` for more information.
 
 ## Contact
 
-Your Name - [@arnoldtoken](https://twitter.com/arnoldtoken) - dev@arnold.su
+Arnold Su - [@arnoldtoken](https://twitter.com/arnoldtoken) - dev@arnold.su
 
 Project Link: [https://github.com/ArnoldTingSu/MDUI](https://github.com/ArnoldTingSu/MDUI)
 

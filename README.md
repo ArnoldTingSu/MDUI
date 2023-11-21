@@ -33,9 +33,9 @@
 <div align="center">
   <a href="https://github.com/arnoldtingsu/MDUI">
     <div>
-    <img src="imges/logo.png" alt="Logo" width="80" height="80">
+    <img src="vuetify-dashboard\imges\logo.png" alt="Logo" width="80" height="80">
     </div>
-    <img src="imges/s3typeface.png" alt="Strike Three" width="90" >
+    <img src="vuetify-dashboard/imges/s3typeface.png" alt="Strike Three" width="90" >
   </a>
 
   <h3 align="center">MDUI</h3>

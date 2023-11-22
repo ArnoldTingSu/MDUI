@@ -1,10 +1,28 @@
+<script setup>
+import {ref} from 'Vue';
+const drawer = ref(false);
+</script>
+
 <template>
 <v-layout class="rounded rounded-md">
   <!-- location="bottom/top" -->
   <!-- density="compact/comfortable/prominent(biggest)" -->
   <!-- :color="`#111111`" -->
   <!-- :elevation="20" shadow-height -->
-  <v-app-bar title="Application bar">
+  <v-app-bar>
+    <template #prepend>
+      <v-app-bar-nav-icon
+        variant="text"
+        @click.stop="drawer = !drawer"
+      ></v-app-bar-nav-icon>
+      <v-toolbar-title>
+        <router-link to="/"
+          class="text-decoration-none text-blue"
+        > 
+          MDUI DASHBOARD 
+        </router-link>
+      </v-toolbar-title>
+    </template>
     <template #append>
       <v-menu>
         <template v-slot:activator="{ props }">
@@ -36,13 +54,18 @@
   <v-navigation-drawer
     rail
     expand-on-hover
+    v-model="drawer"
   >
     <v-list>
       <v-list density="compact" nav>
-          <v-list-item prepend-icon="mdi-folder" title="Posts" value="myfiles"></v-list-item>
-          <v-list-item prepend-icon="mdi-folder" title="Comments" value="myfiles"></v-list-item>
-          <v-list-item prepend-icon="mdi-account-multiple" title="Shared with me" value="shared"></v-list-item>
-          <v-list-item prepend-icon="mdi-star" title="Starred" value="starred"></v-list-item>
+          <v-list-item prepend-icon="mdi-note-outline" 
+            title="Posts"
+            :to="`/posts`"
+          ></v-list-item>
+          <v-list-item prepend-icon="mdi-comment-outline" 
+            title="Comments"
+            :to="`/comments`"
+            ></v-list-item>
         </v-list>
     </v-list>
   </v-navigation-drawer>

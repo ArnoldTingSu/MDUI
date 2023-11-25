@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {ref} from "Vue";
+import {ref} from "vue";
 const posts = ref([
     {
         title: "Post 1", 
@@ -31,38 +31,57 @@ const posts = ref([
     },
     {
         title: "Post 8", 
-        author: "Zed"
+        author: "Red"
+    },
+    {
+        title: "Post 9", 
+        author: "Yed"
+    },
+    {
+        title: "Post 10", 
+        author: "Jed"
+    },
+    {
+        title: "Post 11", 
+        author: "Edd"
     },
 ]);
+
+const selected = ref([]);
+const search = ref("")
+
 </script>
+
 <template>
     <div>
         <h1>POSTS!</h1>
-        <v-table
-        :height="300"
-        :fixed-header="true"
-        density="comfortable"
-        :hover="true"
-        >
-    <thead>
-      <tr>
-        <th class="text-left">
-          Name
-        </th>
-        <th class="text-left">
-          Author
-        </th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr
-        v-for="item in posts"
-        :key="item.title"
-      >
-        <td>{{ item.title }}</td>
-        <td>{{ item.author }}</td>
-      </tr>
-    </tbody>
-  </v-table>
+        <v-text-field
+        v-model="search"
+        label="Search"
+        prepend-inner-icon="mdi-magnify"
+        single-line
+        variant="outlined"
+        hide-details
+      ></v-text-field>
+        <v-data-table 
+            :items="posts"
+            :headers="[
+                {
+                    title: 'Post Title',
+                    align:'start',
+                    sortable: false,
+                    key: 'title'
+                },
+                {
+                    title: 'Author',
+                    align: 'end',
+                    key: 'author'
+                }
+            ]"
+            show-select
+            item-value="title"
+            v-model="selected"
+            :search="search"
+        ></v-data-table>
     </div>
 </template>

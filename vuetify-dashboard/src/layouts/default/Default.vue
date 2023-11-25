@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {ref} from 'Vue';
+import {ref} from 'vue';
 const drawer = ref(false);
 </script>
 
@@ -56,18 +56,19 @@ const drawer = ref(false);
     expand-on-hover
     v-model="drawer"
   >
-    <v-list>
-      <v-list density="compact" nav>
-          <v-list-item prepend-icon="mdi-note-outline" 
-            title="Posts"
-            :to="`/posts`"
+    <v-list density="compact" nav>
+        <v-list-item 
+          prepend-icon="mdi-note-outline" 
+          title="Posts"
+          :to="`/posts`"
+        ></v-list-item>
+        <v-list-item 
+          prepend-icon="mdi-comment-outline" 
+          title="Comments"
+          :to="`/comments`"
           ></v-list-item>
-          <v-list-item prepend-icon="mdi-comment-outline" 
-            title="Comments"
-            :to="`/comments`"
-            ></v-list-item>
-        </v-list>
-    </v-list>
+      </v-list>
+
   </v-navigation-drawer>
 
   <v-main style="min-height: 300px">

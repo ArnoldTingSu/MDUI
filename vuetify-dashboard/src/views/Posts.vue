@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import {ref} from "vue";
+import PostForm from "@/components/PostForm.vue";
+import { refAutoReset } from '@vueuse/core'
 const posts = ref([
     {
         title: "Post 1", 
@@ -49,11 +51,30 @@ const posts = ref([
 
 const selected = ref([]);
 const search = ref("")
+const postForm = ref();
 
+const postSaved = refAutoReset(false, 4000);
 </script>
 
 <template>
 <div>
+    <!-- alert styles v-alert vs snackbar -->
+
+    <v-alert
+        variant="tonal"
+        type="success"
+        closable
+        title="Post Updated"
+        v-model="postSaved"
+    />
+
+    <!-- // <v-snackbar v-model="postSaved" :timeout="4000">
+    //     <div class="d-flex align-center">
+    //         <v-icon icon="mdi-check" class="text-green pr-3"></v-icon>
+    //         Post Saved!
+    //     </div>
+    // </v-snackbar> -->
+
     <h1>POSTS!</h1>
     <v-text-field
         v-model="search"
@@ -83,10 +104,8 @@ const search = ref("")
         v-model="selected"
         :search="search"
     >
-    <template #item.title="{ item }">
-    <v-dialog
-        fullscreen
-    >
+    <template v-slot:item.title="{ item }" >
+    <v-dialog fullscreen>
         <template v-slot:activator="{ props }">
         <button
             v-bind="props"
@@ -96,25 +115,33 @@ const search = ref("")
         </template>
     <template v-slot:default="{ isActive }">
         <v-card>
-        <v-card-title class="text-h5 grey lighten-2">
-            Privacy Policy
-        </v-card-title>
-
-        <v-card-text>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-        </v-card-text>
-
-        <v-divider></v-divider>
-
+            <v-card-title class="text-h5 grey lighten-2">
+                Edit Post
+            </v-card-title>
+            <v-card-text>
+                <PostForm 
+                ref="postForm" 
+                :post="item"
+                @submit="
+                    isActive.value= false
+                    postSaved = true;
+                "
+                />
+            </v-card-text>
         <v-card-actions>
             <v-spacer></v-spacer>
-            <button
-                color="primary"
-                text
+            <v-btn
+                text="Cancel"
                 @click="isActive.value = false"
                 >
-                I accept
-            </button>
+            </v-btn>
+            <v-btn
+                color="blue"
+                text="Save Post"
+                variant="flat"
+                @click="postForm.submit()">
+
+            </v-btn>
         </v-card-actions>
         </v-card>     
     </template>

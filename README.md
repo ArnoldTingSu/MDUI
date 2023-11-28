@@ -142,9 +142,11 @@ _Below is an example of how you can instruct your audience on installing and set
 
 ## Usage
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
+### Alerts Feature
 
-_For more examples, please refer to the [Documentation](https://example.com)_
+<img src="vuetify-dashboard\imges\successAlert.gif" alt="Logo" height="200" height="80">
+
+_For more examples, please refer to the [Documentation](https://vuetifyjs.com/en/components/alerts/#type)_
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 

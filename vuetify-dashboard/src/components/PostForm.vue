@@ -2,16 +2,25 @@
 import {ref} from "vue"
 
 const emit = defineEmits(["submit"])
+
 const props = defineProps<{
     //general object setting, should confine this to a post-request
     post: Record<string, any>;
 }>();
 const form = ref({
-    title: "",
-    tags: [],
-    published: null,
-    body: "",
-    image: [],
+    itemName: String,
+    itemRarity: Number,
+    lootType: String,
+    unique: Boolean,
+    slot: Number,
+    itemType: String,
+    damage: [Number, Number],
+    weaponSpeed: Number,
+    damagePerSec: Number,
+    primaryStats: [],
+    levelRequire: Number,
+    effect: [],
+    flavorText: '',
     ...props.post,
 });
 

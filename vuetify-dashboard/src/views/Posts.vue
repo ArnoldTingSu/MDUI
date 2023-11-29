@@ -2,56 +2,30 @@
 import {ref} from "vue";
 import PostForm from "@/components/PostForm.vue";
 import { refAutoReset } from '@vueuse/core'
-const posts = ref([
+//Item rarity
+// 0 - poor     // 1 - common 
+// 2 - uncommon // 3 - rare 
+// 4 - epic     // 5 - legendary
+const warItem = ref([
     {
-        title: "Post 1", 
-        author: "Fred"
-    },
-    {
-        title: "Post 2", 
-        author: "Bread"
-    },
-    {
-        title: "Post 3", 
-        author: "Sead"
-    },
-    {
-        title: "Post 4", 
-        author: "Kead"
-    },
-    {
-        title: "Post 5", 
-        author: "Head"
-    },
-    {
-        title: "Post 6", 
-        author: "Ked"
-    },
-    {
-        title: "Post 7", 
-        author: "Med"
-    },
-    {
-        title: "Post 8", 
-        author: "Red"
-    },
-    {
-        title: "Post 9", 
-        author: "Yed"
-    },
-    {
-        title: "Post 10", 
-        author: "Jed"
-    },
-    {
-        title: "Post 11", 
-        author: "Edd"
+        itemName: "Hearthstone",
+        itemRarity: 1,
+        lootType: "Soulbound",
+        unique: true,
+        slot: null,
+        itemType: null,
+        damage: [],
+        weaponSpeed: null,
+        damagePerSec: null,
+        primaryStats: [],
+        levelRequire: null,
+        effect: ['Use: Returns you home. Speak with an Innkeeper in a different place to change your home location.'],
+        flavorText: '',
     },
 ]);
 
 const selected = ref([]);
 const search = ref("")
-const postForm = ref();
 
 const postSaved = refAutoReset(false, 4000);
 
@@ -99,72 +73,51 @@ function handleResize() {
         hide-details
     ></v-text-field>
     <v-data-table 
-        v-click-outside="handleClickOutside"
-        v-resize="handleResize"
-        :items="posts"
-        :headers="[
-            {
-                title: 'Post Title',
-                align:'start',
-                sortable: false,
-                key: 'title'
-            },
-            {
-                title: 'Author',
-                align: 'end',
-                key: 'author'
-            }
-        ]"
-        show-select
-        item-value="title"
-        v-model="selected"
-        :search="search"
-        :density="tableDensity"
+    v-click-outside="handleClickOutside"
+    v-resize="handleResize"
+			:items="warItem"
+			:headers="[
+					{
+							title:'Item Name',
+							align:'start',
+							sortable: false,
+							key: 'itemName'
+					},
+					{
+							title:'Effect',
+							align:'start',
+							sortable: false,
+							key: 'effect[0]'
+					},
+					]"
+			show-select
+			item-value="itemName"
+			v-model="selected"
+			:search="search"
+			:density="tableDensity"
     >
-    <template v-slot:item.title="{ item }" >
-    <v-dialog fullscreen>
-        <template v-slot:activator="{ props }">
+    <template v-slot:title="{ items }" >
         <button
             v-ripple class="pa-3"
-            v-bind="props"
+            v-bind="items"
         >
-            {{item.title}}
+            {{items.itemName}}
         </button>
-        </template>
-    <template v-slot:default="{ isActive }">
-        <v-card>
-            <v-card-title class="text-h5 grey lighten-2">
-                Edit Post
-            </v-card-title>
-            <v-card-text>
-                <PostForm 
-                ref="postForm" 
-                :post="item"
-                @submit="
-                    isActive.value= false
-                    postSaved = true;
-                "
-                />
-            </v-card-text>
-        <v-card-actions>
-            <v-spacer></v-spacer>
-            <v-btn
-                text="Cancel"
-                @click="isActive.value = false"
-                >
-            </v-btn>
-            <v-btn
-                color="blue"
-                text="Save Post"
-                variant="flat"
-                @click="postForm.submit()">
-
-            </v-btn>
-        </v-card-actions>
-        </v-card>     
-    </template>
-    </v-dialog>
     </template>
     </v-data-table>
+		<v-tooltip 
+		icon-
+		>
+  <template v-slot:activator="{ warItem }">
+    <v-btn 
+		v-slot:default="items"
+			>
+			<v-icon
+              icon="mdi-view-dashboard"
+              size="large"
+				/>
+		</v-btn>
+  </template>
+</v-tooltip>
 </div>
 </template>

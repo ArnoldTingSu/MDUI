@@ -59,7 +59,7 @@ const drawer = ref(false);
     <v-list density="compact" nav>
         <v-list-item 
           prepend-icon="mdi-note-outline" 
-          title="Posts"
+          title="Items"
           :to="`/posts`"
         ></v-list-item>
         <v-list-item 
@@ -68,7 +68,6 @@ const drawer = ref(false);
           :to="`/comments`"
           ></v-list-item>
       </v-list>
-
   </v-navigation-drawer>
 
   <v-main style="min-height: 300px">
@@ -78,3 +77,4 @@ const drawer = ref(false);
   </v-main>
 </v-layout>
 </template>
+

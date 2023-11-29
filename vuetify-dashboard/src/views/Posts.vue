@@ -54,6 +54,20 @@ const search = ref("")
 const postForm = ref();
 
 const postSaved = refAutoReset(false, 4000);
+
+function handleClickOutside() {
+    selected.value = [];
+}
+
+type densities = "default" | "compact" | "comfortable"
+const tableDensity = ref<densities>("default");
+
+function handleResize() {
+    let density: densities = "default";
+    if (window.innerHeight < 800) density = "comfortable";
+    if (window.innerHeight < 600) density = "compact";
+    tableDensity.value = density;
+}
 </script>
 
 <template>
@@ -85,6 +99,8 @@ const postSaved = refAutoReset(false, 4000);
         hide-details
     ></v-text-field>
     <v-data-table 
+        v-click-outside="handleClickOutside"
+        v-resize="handleResize"
         :items="posts"
         :headers="[
             {
@@ -103,11 +119,13 @@ const postSaved = refAutoReset(false, 4000);
         item-value="title"
         v-model="selected"
         :search="search"
+        :density="tableDensity"
     >
     <template v-slot:item.title="{ item }" >
     <v-dialog fullscreen>
         <template v-slot:activator="{ props }">
         <button
+            v-ripple class="pa-3"
             v-bind="props"
         >
             {{item.title}}
